@@ -21,9 +21,6 @@ myApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
     when('/success', {
       templateUrl: 'views/success.html',
       controller: 'SuccessController',
-      resolve: {
-        currentAuth: $rootScope.currentUser
-      }
     }).
     otherwise({
       redirectTo: '/login'

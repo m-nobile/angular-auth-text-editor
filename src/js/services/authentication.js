@@ -13,12 +13,13 @@ myApp.factory('Authentication',
           date: firebase.database.ServerValue.TIMESTAMP,
           regUser: authUser.uid,
           displayName: authUser.displayName,
-          email: authUser.email
+          email: authUser.email,
+          text: ""
       });
       firebase.auth().updateCurrentUser(authUser); 
       $location.path('/success');
     }
-    $rootscope = firebase.auth().currentUser  
+    $rootScope.currentUser = firebase.auth().currentUser;
   });
 
   myObject = {

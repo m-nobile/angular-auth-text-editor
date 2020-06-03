@@ -1,3 +1,6 @@
 myApp.controller('SuccessController', ['$scope', function($scope) {
-  $scope.message = "Success!!!";
+  var editor = new MediumEditor('.editable');
+  $scope.onChange = function(text) {
+    firebase.database().ref('users/' + $scope.currentUser.uid + "/text").set(text);
+  };
 }]);

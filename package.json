@@ -1,0 +1,15 @@
+{
+  "name": "angular-auth-text-editor",
+  "version": "1.0.0",
+  "description": "Angular text editor application with user authentication using firebase.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/m-nobile/angular-auth-text-editor.git"
+  },
+  "author": "m-nobile",
+  "dependencies": {
+    "angular": "1.7.x",
+    "angular-animate": "1.7.x",
+    "angular-route": "^1.7.9"
+  }
+}
