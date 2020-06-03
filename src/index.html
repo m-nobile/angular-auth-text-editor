@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Angular Registration</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,100,700,900' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="node_modules/angular/angular.min.js"></script>
+  <script src="node_modules/angular-route/angular-route.min.js"></script>
+  <script src="node_modules/angular-animate/angular-animate.min.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-database.js"></script>
+  <script>
+
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyAxSiy_VDhCynsI9e6d2E8xR77k_VHj2ro",
+      authDomain: "angular-auth-text-editor.firebaseapp.com",
+      databaseURL: "https://angular-auth-text-editor.firebaseio.com",
+      projectId: "angular-auth-text-editor",
+      storageBucket: "angular-auth-text-editor.appspot.com",
+      messagingSenderId: "453758775968",
+      appId: "1:453758775968:web:c1529f97e010105270cfc5",
+      measurementId: "G-239P0HNMZ3"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>  
+  <script src="node_modules/angularfire/dist/angularfire.min.js"></script>
+
+  <script src="js/app.js"></script>
+  <script src="js/services/authentication.js"></script>
+  <script src="js/controllers/registration.js"></script>
+  <script src="js/controllers/success.js"></script>
+
+</head>
+<body>
+<div class="page">
+
+  <div class="userinfo" ng-show="currentUser" ng-controller="RegistrationController">
+    <span class="userinfo">Hi {{currentUser.firstname}}</span>
+    <a ng-href="#/login" ng-click="logout()">logout</a>
+  </div>
+
+</div>
+</body>
+</html>
