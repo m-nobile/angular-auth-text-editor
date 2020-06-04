@@ -1,7 +1,10 @@
-<div class="success">
-
-  <div class="textintro">
-    <h1>Success</h1>
-    <p>{{ message }}</p>
-  </div>
-</div>
+<section>
+  <link rel="stylesheet" href="node_modules/medium-editor/dist/css/medium-editor.css">
+  <link rel="stylesheet" href="node_modules/medium-editor/dist/css/themes/default.css">
+  <form name="myform">
+    <div class="container">
+      <h1>Text Editor</h1>
+      <div class="text-editor" id="text" ng-keyup="onChange()"></div>
+    </div> 
+  </form>
+</section>
