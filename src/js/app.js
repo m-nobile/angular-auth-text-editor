@@ -16,11 +16,11 @@ myApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
   $routeProvider.
     when('/login', {
       templateUrl: 'views/login.html',
-      controller: 'RegistrationController'
+      controller: 'LoginController'
     }).
-    when('/success', {
-      templateUrl: 'views/success.html',
-      controller: 'SuccessController',
+    when('/text-editor', {
+      templateUrl: 'views/textEditor.html',
+      controller: 'TextEditorController',
     }).
     otherwise({
       redirectTo: '/login'
