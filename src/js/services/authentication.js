@@ -9,20 +9,16 @@ myApp.factory('Authentication',
 
   auth.onAuthStateChanged(async function(authUser) {
     if(authUser) {
-      var existingUser = authenticationObject.getCurrentAuthUser();
-      if(!existingUser ||  existingUser.uid != authUser.uid) {
-        await database.ref('users/' + authUser.uid).set({
-          date: firebase.database.ServerValue.TIMESTAMP,
-          regUser: authUser.uid,
-          displayName: authUser.displayName,
-          email: authUser.email,
-          text: "" 
-        });
-      }
-        $rootScope.currentUser = auth.currentUser;
-        $rootScope.currentUser.text = existingUser ? existingUser.text :"";
+      $rootScope.currentUser = auth.currentUser;
+      await database.ref('users/' + authUser.uid).once("value").then(function(data) {
+        $rootScope.currentUser.text = data.val().text;
+        var element = document.getElementById("text");
+        if(element) {
+          element.innerText = $rootScope.currentUser.text;
+        }
         $location.path('/text-editor');
-        $rootScope.$apply();   
+        $rootScope.$apply();
+      });
     } else {
       authenticationObject.logout();
     }
@@ -30,14 +26,25 @@ myApp.factory('Authentication',
 
   return authenticationObject = {
     login: function() {
-      auth.signInWithRedirect(provider).catch(function(error) {
-        $rootScope.message = error.message;
-      });
-    },
-    getCurrentAuthUser: function() {
-      database.ref('users/' + auth.currentUser.uid).once("value").then(function(data) {
-        return data.val();
-      });
+      auth.signInWithPopup(provider).then(async function(result) {
+        $rootScope.currentUser = result.user;
+        await database.ref('users/' + result.user.uid).once("value").then(function(data) {
+          var user = data.val();
+          if(user){
+            $rootScope.currentUser.text = user.text;
+          } else {
+            $rootScope.currentUser.text = "";
+            database.ref('users/' + result.user.uid).set({
+              date: firebase.database.ServerValue.TIMESTAMP,
+              regUser: result.user.uid,
+              displayName: result.user.displayName,
+              email: result.user.email,
+              text: ""
+            });
+          }
+          $location.path('/text-editor');
+        });
+      })
     },
     logout: function() {
       auth.signOut();

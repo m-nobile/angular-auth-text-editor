@@ -10,6 +10,7 @@
   "dependencies": {
     "angular": "1.7.x",
     "angular-animate": "1.7.x",
-    "angular-route": "^1.7.9"
+    "angular-route": "^1.7.9",
+    "medium-editor": "^5.23.3"
   }
 }

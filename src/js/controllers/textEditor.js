@@ -1,14 +1,8 @@
 myApp.controller('TextEditorController', ['$scope', function($scope) {
   var editor = new MediumEditor('.text-editor', { placeholder: false });
 
-  $scope.init = async function() {
-    if(!$scope.currentUser) { 
-      var user;
-      await firebase.database.ref('users/' + firebase.auth().currentUser.uid).once("value").then(function(data) {
-        user=  data.val();
-      });
-      document.getElementById("text").innerText = user.text;
-    } else {
+  $scope.init = function() {
+    if($scope.currentUser && $scope.currentUser.text) { 
       document.getElementById("text").innerText = $scope.currentUser.text;
     }
   }
