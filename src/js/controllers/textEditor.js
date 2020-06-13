@@ -9,7 +9,6 @@ myApp.controller('TextEditorController', ['$scope', function($scope) {
 
   $scope.onChange = function() {
     var text = document.getElementById("text").innerText;
-    firebase.database().ref('users/' + $scope.currentUser.uid + "/text").set(text);
     //check for latex equation
     var startDollar = text.indexOf("$");
     if (startDollar !== -1) {
@@ -19,9 +18,11 @@ myApp.controller('TextEditorController', ['$scope', function($scope) {
         var latexElement =
           '<img src="https://latex.codecogs.com/gif.latex?' +
           latexExpression + '" title="" style="">';
-          editor.setContent(text.replace(latexExpression, latexElement).replace(/[$]/g, ""));
+        text = text.replace(latexExpression, latexElement).replace(/[$]/g, "");
+        editor.setContent(text);
       }
     }
+    firebase.database().ref('users/' + $scope.currentUser.uid + "/text").set(text);
   };
 
   $scope.$on('$destroy', function () {
